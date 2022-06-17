@@ -42,13 +42,52 @@ var playerInfo = {
   return value;
 
   };
+
+  var fightOrSkip = function() {
+    // ask player if they'd like to fight or skip using fightOrSkip function
+    var promptFight = window.prompt('Would you like to FIGHT or SKIP this battle? Enter "FIGHT" or "SKIP" to choose.');
   
+    /// Conditional Recursive Function Call
+if (promptFight === "" || promptFight === null) {
+  window.alert("You need to provide a valid answer! Please try again.");
+  return fightOrSkip();
+}
+
+promptFight = promptFight.toLowerCase();
+
+if (promptFight === "skip") {
+
+  // if yes (true), leave fight
+if (confirmSkip) {
+  window.alert(playerInfo.name + " has decided to skip this fight. Goodbye!");
+  // subtract money from playerMoney for skipping, but don't let them go into the negative
+  playerInfo.money = Math.max(0, playerInfo.money - 10);
+
+  // return true if player wants to leave
+  return true;
+  return false;
+  }
+ }
+};
+
+
+
 //fight function statements
 var fight = function (enemy) {
+
     // repeat and execute as long as the enemy-robot is alive 
     while (enemy.health > 0 && enemy.health > 0) {
 
-        // ask player if they'd like to fight or run
+    // ask player if they'd like to fight or skip using fightOrSkip function
+    if (fightOrSkip()) {
+   // if true, leave fight by breaking loop
+   break;
+    }  
+
+    var damage = randomNumber(playerInfo.attack - 3, playerInfo.attack);
+
+      
+      // ask player if they'd like to fight or run
         var promptFight = window.prompt("Would you like to FIGHT or SKIP this battle? Enter 'FIGHT' or 'SKIP' to choose.");
 
         // if player choses to skip confirm and then stop the loop
@@ -216,6 +255,27 @@ var endGame = function() {
    
    };
 
+// function to set name
+var getPlayerName = function() {
+  var name = "";
+
+// ***************************************
+// ADD LOOP HERE WITH PROMPT AND CONDITION
+// ***************************************
+while (name === "" || name === null) {
+  name = prompt("What is your robot's name?");
+}
+  console.log("Your robot's name is " + name);
+  return name;
+};
+
+
+/* GAME INFORMATION / VARIABLES */
+var playerInfo = {
+  name: getPlayerName(),
+
+}
+
 // You can also log multiple values at once like this
 var enemyInfo = [
     {
@@ -223,7 +283,7 @@ var enemyInfo = [
         attack: randomNumber(10, 14),
     },
     {
-        name: "Amy Android",
+        name: "Amy Andriod",
         attack: randomNumber(10, 14)
       },
       {
@@ -232,9 +292,6 @@ var enemyInfo = [
       }
 
   ];
-  
-  
-
 
 // Play again
-  startGame();
+startGame();
