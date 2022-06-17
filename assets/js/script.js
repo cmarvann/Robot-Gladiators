@@ -129,16 +129,16 @@ for (var i = 0; i < enemyInfo.length; i++) {
 window.alert("Welcome to Robot Gladiators!" + (i + 1));
 
 // pick new enemy to fight based on the index of the enemy.names array
- var pickedEnemyObi = enemyInfo[i];
+ var pickedEnemyObj = enemyInfo[i];
 
     // reset enemy.health before starting new fight
-    pickedenemyObihealth = randomNumber(40, 60);
+    pickedEnemyObj.health = randomNumber(40, 60);
 
     // use debugger to pause script from running and check what's going on at that moment in the code
     // debugger;
 
     // pass the pickedenemy.name variable's value into the fight function, where it will assume the value of the enemy.name parameter
-    fight(pickedEnemyObi);
+    fight(pickedEnemyObj);
 
       
      // if we're not at the last enemy in the array
@@ -216,23 +216,43 @@ var endGame = function() {
    
    };
 
-// You can also log multiple values at once like this
-var enemyInfo = [
-    {
-        name: "Roborto",
-        attack: randomNumber(10, 14),
-    },
-    {
-        name: "Amy Android",
-        attack: randomNumber(10, 14)
-      },
-      {
-        name: "Robo Trumble",
-        attack: randomNumber(10, 14)
-      }
-
-  ];
+   // function to set name
+ 
+  var getPlayerName = function () {
+  var name = "";
   
+
+  while (name === "" || name === null) {
+    name = prompt("What is your robot's name?");
+  }
+
+  console.log("Your robot's name is " + name);
+  return name;
+  };
+  // *******
+  /* GAME INFORMATION / VARIABLES */
+var playerInfo = {
+  name: getPlayerName(),
+// other playerInfo properties and methods
+ 
+}
+// You can also log multiple values at once like this
+  var enemyInfo = [
+  {
+    name: "Roborto",
+    attack: randomNumber(10, 14),
+  },
+  {
+    name: "Amy Android",
+    attack: randomNumber(10, 14)
+  },
+  {
+    name: "Robo Trumble",
+    attack: randomNumber(10, 14)
+  }
+
+];
+
   
 
 
