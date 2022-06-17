@@ -40,11 +40,12 @@ var playerInfo = {
   var value = Math.floor(Math.random() * (max - min + 1)) + min;
 
   return value;
+  }
 
-  };
-  
+
 //fight function statements
 var fight = function (enemy) {
+
     // repeat and execute as long as the enemy-robot is alive 
     while (enemy.health > 0 && enemy.health > 0) {
 
@@ -68,10 +69,10 @@ var fight = function (enemy) {
             }
         }
     
-        // remove enemy's health by subtracting the amount set in the playerInfo.attack variable
         // generate random damage value based on player's attack power
         var damage = randomNumber(playerInfo.attack - 3, playerInfo.attack);
-        
+      
+        // remove enemy's health by subtracting the amount set in the playerInfo.attack variable
         enemy.health = Math.max(0, enemy.health - damage);
     
         console.log(
@@ -82,17 +83,19 @@ var fight = function (enemy) {
         if (enemy.health <= 0) {
             window.alert(enemy.name + ' has died!');
 
-            // award player money for winning
-            playerInfo.money = playerInfo.money + 20;
-            // leave while() loop since enemy is dead
-            break;
+        // award player money for winning
+        playerInfo.money = playerInfo.money + 20;
+           
+        // leave while() loop since enemy is dead
+        break;
         } else {
-            window.alert(enemy.name + ' still has ' + enemy.health + ' health left.');
+        window.alert(enemy.name + ' still has ' + enemy.health + ' health left.');
         }
-
-        // remove players's health by subtracting the amount set in the enemy.attack variable
-        var damage = randomNumber(enemy.attack - 3, enemy.attack);
-        
+        // player gets attacked first
+         } else {
+          var damage = randomNumber(enemy.attack - 3, enemy.attack);
+      
+        // remove player's health by subtracting the amount we set in the damage variable
         playerInfo.health = Math.max(0, playerInfo.health - damage);
         console.log(
             enemy.name + ' attacked ' + playerInfo.name + '. ' + playerInfo.name + ' now has ' + playerInfo.health + ' health remaining.'
@@ -101,12 +104,15 @@ var fight = function (enemy) {
         // check player's health
         if (playerInfo.health <= 0) {
             window.alert(playerInfo.name + ' has died!');
+        
             // leave while() loop if player is dead
             break;
         } else {
             window.alert(playerInfo.name + ' still has ' + playerInfo.health + ' health left.');
         }
-    } // end of while loop
+      }
+
+    // end of while loop
 }; 
 // end of fight function
 
@@ -195,25 +201,24 @@ var endGame = function() {
           "Would you like to REFILL your health, UPGRADE your attack, or LEAVE the store? Please enter one: 'REFILL', 'UPGRADE', or 'LEAVE' to make a choice."
         );
       
-  // use switch to carry out action
+  shopOptionPrompt = parseInt(shopOptionPrompt);
+
+  // use switch case to carry out action
   switch (shopOptionPrompt) {
-    case "REFILL": 
-    case "refill":
-    playerInfo.refillHealth();
-    break;
-    case "UPGRADE": // new case
-    case "upgrade":
-    playerInfo.upgradeAttack();
-    break;
-     window.alert("Leaving the store.");
-   
-    break;
+    case 1:
+      playerInfo.refillHealth();
+      break;
+    case 2:
+      playerInfo.upgradeAttack();
+      break;
+    case 3:
+      window.alert("Leaving the store.");
+      break;
     default:
-     window.alert("You did not pick a valid option. Try again.");
-    shop();
-    break;
-     }
-   
+      window.alert("You did not pick a valid option. Try again.");
+      shop();
+      break;
+  }
    };
 
 // You can also log multiple values at once like this
